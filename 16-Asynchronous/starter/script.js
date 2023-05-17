@@ -11,7 +11,7 @@ const countriesContainer = document.querySelector('.countries');
 // request.send()
 // console.log(request.responseText);
 
-// request.addEventListener('load',()=>{
+// request.addEventListener('load',()=>{ 
 //     console.log(this.responseText);
 // })
 
@@ -35,9 +35,9 @@ const countriesContainer = document.querySelector('.countries');
 
 // getData()
 
-const renderError = (msg)=>{
-    countriesContainer.insertAdjacentText('beforeend',msg)
-    countriesContainer.style.opacity=1;
+const renderError = (msg) => {
+    countriesContainer.insertAdjacentText('beforeend', msg)
+    countriesContainer.style.opacity = 1;
 }
 
 // handling errors 
@@ -64,17 +64,40 @@ const renderError = (msg)=>{
  * Good example is when you try to get data that doesnt exist in the api
  * 
  */
-const getData3 = function(){
-    fetch('https://jsonplaceholder.typicode.com/photos')
-    .then(response => {
-        // this checks the response return status code if it is ok
-        if(!response.ok){
-            // creates a new Error instance once its true
-            throw new Error(`Data not found ${response.status}`)
-        }
-        const data = response.json()
-        return data
-    })
-    // gets all the errors in the in code
-    .catch(error => renderError(error.message))
-}
+// const getData3 = function(){
+//     fetch('https://jsonplaceholder.typicode.com/photos')
+//     .then(response => {
+//         // this checks the response return status code if it is ok
+//         if(!response.ok){
+//             // creates a new Error instance once its true
+//             throw new Error(`Data not found ${response.status}`)
+//         }
+//         const data = response.json()
+//         return data
+//      })
+//     // gets all the errors in the in code
+//     .catch(error => renderError(error.message))
+// }
+
+
+// creating a new promise
+
+const lottery = new Promise(function (resovel, reject) {
+    console.log('Lottery is happening 💎💎');
+    
+ setTimeout(()=>{
+    if (Math.random() >= 0.5) {
+
+        resovel('YOU WON MONEY 💸💸')
+    } else {
+        reject(new Error('YOU LOST 💩💩'))
+    }
+ },2000)
+})
+
+
+lottery.then(res => {
+    console.log(res);
+}).catch(err => {
+    console.error(err)
+})
